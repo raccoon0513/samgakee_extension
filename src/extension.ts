@@ -10,14 +10,18 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "samgakee" is now active!');
 
+
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('samgakee.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from samgakee!');
-	});
+	let disposable = vscode.commands.registerCommand('samgakee.create', () => {
+        // ... (이전에 제공한 WebView 생성 및 실행 로직)
+        
+        // 새 WebView 패널 생성 (나머지 코드는 이전과 동일)
+        if (currentPanel) {
+            currentPanel.reveal(vscode.ViewColumn.Active);
+            return;
+        }
 
 	context.subscriptions.push(disposable);
 }

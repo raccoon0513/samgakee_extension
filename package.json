@@ -6,6 +6,7 @@
   "engines": {
     "vscode": "^1.105.0"
   },
+  
   "categories": [
     "Other"
   ],
@@ -14,8 +15,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "samgakee.helloWorld",
-        "title": "Hello World"
+        "command": "samgakee.create",
+        "title": "samgak_start"
       }
     ]
   },
