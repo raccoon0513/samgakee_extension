@@ -16,7 +16,7 @@
     "commands": [
       {
         "command": "samgakee.create",
-        "title": "samgak_start"
+        "title": "samgakee_start"
       }
     ]
   },
