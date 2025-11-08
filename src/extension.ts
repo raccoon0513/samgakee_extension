@@ -1,9 +1,10 @@
-// The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
 
 // 전역 변수로 현재 WebView 패널을 저장하여 하나만 열리도록 관리합니다.
 let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
+//gif route
+const gif_route = "\media\samgakee-unscreen.gif"
 export function activate(context: vscode.ExtensionContext) {
     console.log('GIF Pet extension "samgakee" is now active.');
 
@@ -44,9 +45,11 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // WebView에 들어갈 HTML 콘텐츠를 생성하는 함수
+// 'currentPanel is undefined' 오류를 방지하기 위해 webview 객체를 직접 받습니다.
 function getWebviewContent(context: vscode.ExtensionContext, webview: vscode.Webview) {
     // GIF 파일 경로: media/samgakee-unscreen.gif 에 맞춰 URI를 만듭니다.
-    const gifPath = vscode.Uri.joinPath(context.extensionUri, 'media', 'samgakee-unscreen.gif');
+    //samgakee\media\samgakee-unscreen.gif
+    const gifPath = vscode.Uri.joinPath(context.extensionUri, gif_route);
     const gifSrc = webview.asWebviewUri(gifPath).toString(); 
 
     // HTML, CSS (움직임 및 투명 배경), JavaScript (애니메이션 루프)
@@ -61,13 +64,12 @@ function getWebviewContent(context: vscode.ExtensionContext, webview: vscode.Web
                 margin: 0;
                 padding: 0;
                 overflow: hidden; 
-                background-color: transparent !important; 
+                background-color: transparent !important; /* WebView 배경 투명 */
             }
             #gif-container {
                 position: absolute; 
                 z-index: 1000; 
-                /* 클릭-스루: 마우스 이벤트를 아래의 에디터로 통과시킵니다. */
-                pointer-events: none; 
+                pointer-events: none; /* 클릭-스루 */
             }
             #gif-container img {
                 width: 150px; /* GIF 크기 조절 */
@@ -80,8 +82,6 @@ function getWebviewContent(context: vscode.ExtensionContext, webview: vscode.Web
             <img src="${gifSrc}" />
         </div>
         <script>
-            // VS Code API를 사용하려면 acquireVsCodeApi(); 를 사용해야 하지만, 현재 기능에는 필수는 아님
-            // const vscode = acquireVsCodeApi(); 
             const gifContainer = document.getElementById('gif-container');
             
             let x = Math.random() * (window.innerWidth - 150); 
@@ -126,7 +126,3 @@ function getWebviewContent(context: vscode.ExtensionContext, webview: vscode.Web
 }
 
 export function deactivate() {}
-
-// NOTE: currentPanel 변수가 코드 블록 밖에 정의되어 있어야 하므로
-// extension.ts 파일 최상단에 이 변수를 추가해야 합니다.
-// let currentPanel: vscode.WebviewPanel | undefined = undefined;
