@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('samgakee.create', () => {
         // 이미 패널이 열려있으면 해당 패널을 다시 활성화합니다.
         if (currentPanel) {
-            currentPanel.reveal(vscode.ViewColumn.Active);
+            currentPanel.reveal(vscode.ViewColumn.One); 
             return;
         }
 
@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
         currentPanel = vscode.window.createWebviewPanel(
             'gifPet', 
             'GIF Pet', 
-            vscode.ViewColumn.Active, // 현재 활성 에디터 옆에 패널 표시
+            vscode.ViewColumn.One, // 현재 활성 에디터 옆에 패널 표시
             {
                 enableScripts: true, 
                 // media 폴더에 접근할 수 있도록 경로 허용
@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 function getWebviewContent(context: vscode.ExtensionContext, webview: vscode.Webview) {
     // GIF 파일 경로: media/samgakee-unscreen.gif 에 맞춰 URI를 만듭니다.
     //samgakee\media\samgakee-unscreen.gif
-    const gifPath = vscode.Uri.joinPath(context.extensionUri, gif_route);
+    const gifPath = vscode.Uri.joinPath(context.extensionUri, 'media', 'samgakee-unscreen.gif');
     const gifSrc = webview.asWebviewUri(gifPath).toString(); 
 
     // HTML, CSS (움직임 및 투명 배경), JavaScript (애니메이션 루프)

@@ -10,7 +10,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": ["onCommand:samgakee.create"],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
